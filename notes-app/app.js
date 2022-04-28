@@ -1,3 +1,4 @@
+const validator = require('validator');
 
 //FileSystem module
 const fs = require('fs');
@@ -18,7 +19,9 @@ fs.appendFileSync('notes.js', `
 const getNotes = require('./notes');
 
 //execute the function
-getNotes();
+//getNotes();
+
+console.log(validator.isEmail('eshomali@gmail.com'));
 
 
 
