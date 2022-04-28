@@ -25,7 +25,7 @@ const getNotes = require('./notes');
 */
 
 console.log(validator.isEmail('eshomali@gmail.com'));
-console.log(chalk.green('hello mate'));
+console.log(chalk.blue('hello mate'));
 
 
 
