@@ -1,7 +1,9 @@
-const validator = require('validator');
+import validator from 'validator';
+import chalk from 'chalk';
 
+/*
 //FileSystem module
-const fs = require('fs');
+import fs from 'fs';
 
 //Create js file with function
 fs.writeFileSync('notes.js', `
@@ -20,8 +22,10 @@ const getNotes = require('./notes');
 
 //execute the function
 //getNotes();
+*/
 
 console.log(validator.isEmail('eshomali@gmail.com'));
+console.log(chalk.green('hello mate'));
 
 
 
