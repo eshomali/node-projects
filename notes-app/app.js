@@ -1,9 +1,9 @@
 import validator from 'validator';
-
 import chalk from 'chalk';
-
 import yargs from 'yargs';
 import {hideBin} from 'yargs/helpers'; //hideBin is a shorthand for process.argv.slice(2)
+import notes from './notes.js';
+
 
 /*
 //FileSystem module
@@ -50,8 +50,7 @@ yargs(hideBin(process.argv)).command({
         }
     },
     handler: function (argv) {
-        console.log('Title: ' + argv.title);
-        console.log('Body: ' + argv.body);
+        notes.addNote(argv.title, argv.body);
     }
 }).parse();
 
