@@ -49,8 +49,8 @@ yargs(hideBin(process.argv)).command({
             type: 'string'
         }
     },
-    handler: function (argv) {
-        notes.addNote(argv.title, argv.body);
+    handler(argv){
+        notes.addNote(argv.title, argv.body) 
     }
 }).parse();
 
@@ -65,8 +65,7 @@ yargs(hideBin(process.argv)).command({
             type: 'string'
         }
     },
-    handler: function (argv) {
-        //console.log('removing a note..');
+    handler(argv) {
         notes.removeNote(argv.title);
     }
 }).parse();
@@ -75,7 +74,7 @@ yargs(hideBin(process.argv)).command({
 yargs(hideBin(process.argv)).command({
     command: 'list',
     describe: 'list all notes',
-    handler: function () {
+    handler() {
         console.log('listing all notes..');
     }
 }).parse();
@@ -84,7 +83,7 @@ yargs(hideBin(process.argv)).command({
 yargs(hideBin(process.argv)).command({
     command: 'read',
     describe: 'read note',
-    handler: function () {
+    handler() {
         console.log('reading note..');
     }
 }).parse();

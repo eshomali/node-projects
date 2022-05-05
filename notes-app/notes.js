@@ -1,7 +1,7 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
-const loadNotes = function() {
+const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync('notes.json');
         const dataJSON = dataBuffer.toString();
@@ -11,42 +11,33 @@ const loadNotes = function() {
     }
 }
 
-const getNotes = function() {
-    return console.log('Your notes...');
-}
+const getNotes = () => console.log('Your notes...');
 
-const addNote = function(title, body) {
+
+const addNote = (title, body) => {
     const notes = loadNotes();
-    
-    const duplicateNotes = notes.filter(function(eachNote) {    //filters out single note
-        return eachNote.title === title;                        //return true or false
-    });
-    
+    const duplicateNotes = notes.filter((eachNote) => eachNote.title === title);    //filters out single note 
     if (duplicateNotes.length === 0) {                      // if no matching array
         notes.push({
             title: title,
             body: body
         });
         saveNotes(notes);
-        console.log(`${title} saved successfully`);
+        console.log(chalk.green(`${title} saved successfully`));
     } else {
-        console.log('title exists');
+        console.log(chalk.red('title exists'));
     }
 }
 
-const saveNotes = function(notes) {      //save to json file
+const saveNotes = (notes) => {      //save to json file
     const dataJSON = JSON.stringify(notes); //convert js object to json string
     fs.writeFileSync('notes.json', dataJSON);
 }
 
 
-const removeNote = function(title) {
+const removeNote = (title) => {
     const notes = loadNotes();      // load notes as object
-
-    const notesToKeep = notes.filter(function(eachNote) {     //filters in all notes to save back except for removed one
-        return eachNote.title !== title;
-    });
-
+    const notesToKeep = notes.filter((eachNote) => eachNote.title !== title);  //filters in all notes to save back except for removed one
     if(notesToKeep.length < notes.length) {
         console.log(chalk.green('Note Removed'));
         saveNotes(notesToKeep);
