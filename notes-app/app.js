@@ -58,8 +58,16 @@ yargs(hideBin(process.argv)).command({
 yargs(hideBin(process.argv)).command({
     command: 'remove',
     describe: 'remove a note',
-    handler: function () {
-        console.log('removing a note..');
+    builder: {
+        title: {
+            describe: 'Note Title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: function (argv) {
+        //console.log('removing a note..');
+        notes.removeNote(argv.title);
     }
 }).parse();
 
