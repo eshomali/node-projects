@@ -11,8 +11,11 @@ const loadNotes = () => {
     }
 }
 
-const getNotes = () => console.log('Your notes...');
-
+const listNotes = () => {
+    const notes = loadNotes();
+    console.log(chalk.inverse('Your Notes'));
+    notes.forEach(eachNote => console.log(chalk.blue(eachNote.title)));
+}
 
 const addNote = (title, body) => {
     const notes = loadNotes();
@@ -34,7 +37,6 @@ const saveNotes = (notes) => {      //save to json file
     fs.writeFileSync('notes.json', dataJSON);
 }
 
-
 const removeNote = (title) => {
     const notes = loadNotes();      // load notes as object
     const notesToKeep = notes.filter((eachNote) => eachNote.title !== title);  //filters in all notes to save back except for removed one
@@ -47,8 +49,8 @@ const removeNote = (title) => {
 }
 
 const notes = {             //to be exported
-    getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 };
 export default notes;

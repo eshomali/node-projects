@@ -75,7 +75,7 @@ yargs(hideBin(process.argv)).command({
     command: 'list',
     describe: 'list all notes',
     handler() {
-        console.log('listing all notes..');
+        notes.listNotes();
     }
 }).parse();
 
