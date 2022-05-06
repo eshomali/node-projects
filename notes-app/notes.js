@@ -1,6 +1,18 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
+/*  Functions:
+    parse()     - converts string to JS object
+    stringify() - converts JS object to JSON string
+    push()    - adds new values to the target properties in JS object
+    filter()  - we can filter in data or filter out data as JS object based on boolean return value
+    find()    - similar to filter but finds single target in JS object without scanning thru entire array
+    forEach() - loops thru JS object
+*/
+
+
+/*  Reads raw JSON file, converts data to string,
+    parses string data as JS object for manipulation */  
 const loadNotes = () => {
     try {
         const dataBuffer = fs.readFileSync('notes.json');
@@ -11,12 +23,23 @@ const loadNotes = () => {
     }
 }
 
+/*  Takes in final JS object, converts it to JSON string,
+    writes entire string back to file       */  
+const saveNotes = (notes) => {
+    const dataJSON = JSON.stringify(notes);
+    fs.writeFileSync('notes.json', dataJSON);
+}
+
+/*  Utility
+    Lists every note in the JSON file       */  
 const listNotes = () => {
     const notes = loadNotes();
     console.log(chalk.inverse('Your Notes'));
     notes.forEach(eachNote => console.log(chalk.blue(eachNote.title)));
 }
 
+/*  Utility
+    Appends a new note to the JS object    */  
 const addNote = (title, body) => {
     const notes = loadNotes();
     //const duplicateNotes = notes.filter((eachNote) => eachNote.title === title);    //filters out single note, filter takes into account EVERY note (inefficient)
@@ -34,11 +57,8 @@ const addNote = (title, body) => {
     }
 }
 
-const saveNotes = (notes) => {      //save to json file
-    const dataJSON = JSON.stringify(notes); //convert js object to json string
-    fs.writeFileSync('notes.json', dataJSON);
-}
-
+/*  Utility
+    Removes a current note based on title    */ 
 const removeNote = (title) => {
     const notes = loadNotes();      // load notes as object
     const notesToKeep = notes.filter((eachNote) => eachNote.title !== title);  //filters in all notes to save back except for removed one
@@ -50,6 +70,8 @@ const removeNote = (title) => {
     }
 }
 
+/*  Utility
+    Reads a particular note based on title    */ 
 const readNote = (title) => {
     const notes = loadNotes();
     const findNote = notes.find( (aNote) => aNote.title === title );                         //check if title exists
@@ -64,7 +86,8 @@ const readNote = (title) => {
     }
 }
 
-const notes = {             //to be exported
+//Exports
+const notes = {
     addNote: addNote,
     removeNote: removeNote,
     listNotes: listNotes,
