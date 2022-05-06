@@ -83,8 +83,8 @@ yargs(hideBin(process.argv)).command({
 yargs(hideBin(process.argv)).command({
     command: 'read',
     describe: 'read note',
-    handler() {
-        console.log('reading note..');
+    handler(argv) {
+        notes.readNote(argv.title);
     }
 }).parse();
 

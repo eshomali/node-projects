@@ -19,8 +19,10 @@ const listNotes = () => {
 
 const addNote = (title, body) => {
     const notes = loadNotes();
-    const duplicateNotes = notes.filter((eachNote) => eachNote.title === title);    //filters out single note 
-    if (duplicateNotes.length === 0) {                      // if no matching array
+    //const duplicateNotes = notes.filter((eachNote) => eachNote.title === title);    //filters out single note, filter takes into account EVERY note (inefficient)
+    const duplicateNote = notes.find( (eachNote) => eachNote.title === title);        //find is better method for search since it stops (efficient)
+    
+    if (!duplicateNote) {       //if duplicateNote returns false, add new note                
         notes.push({
             title: title,
             body: body
@@ -48,9 +50,24 @@ const removeNote = (title) => {
     }
 }
 
+const readNote = (title) => {
+    const notes = loadNotes();
+    const findNote = notes.find( (aNote) => aNote.title === title );                         //check if title exists
+    if(findNote) {                                                                           //if title exists
+        const filterInNote = notes.filter( (theNote) => theNote.title === title);            //filter in that single note
+        filterInNote.forEach(aNote => console.log(`Title: ` + aNote.title, `Body: ` + aNote.body));
+        
+        //console.log(findNote.title);                                                      //find() also acts as filter, can directly print values
+        //console.log(findNote.body);
+    } else {
+        console.log(chalk.red('No Title Found'));
+    }
+}
+
 const notes = {             //to be exported
     addNote: addNote,
     removeNote: removeNote,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNote: readNote
 };
 export default notes;
