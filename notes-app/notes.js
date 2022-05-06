@@ -8,6 +8,7 @@ import chalk from 'chalk';
     filter()  - we can filter in data or filter out data as JS object based on boolean return value
     find()    - similar to filter but finds single target in JS object without scanning thru entire array
     forEach() - loops thru JS object
+    debugger  - chrome://inspect
 */
 
 
@@ -75,6 +76,7 @@ const removeNote = (title) => {
 const readNote = (title) => {
     const notes = loadNotes();
     const findNote = notes.find( (aNote) => aNote.title === title );                         //check if title exists
+    //debugger
     if(findNote) {                                                                           //if title exists
         const filterInNote = notes.filter( (theNote) => theNote.title === title);            //filter in that single note
         filterInNote.forEach(aNote => console.log(`Title: ` + aNote.title, `Body: ` + aNote.body));
