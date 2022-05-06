@@ -5,8 +5,8 @@ import chalk from 'chalk';
     parse()     - converts string to JS object
     stringify() - converts JS object to JSON string
     push()    - adds new values to the target properties in JS object
-    filter()  - we can filter in data or filter out data as JS object based on boolean return value
-    find()    - similar to filter but finds single target in JS object without scanning thru entire array
+    filter()  - we can filter in data or filter out data based on boolean return value, returns JS ARRAY
+    find()    - similar to filter but returns JS OBJECT (finds target without scanning thru entire array)
     forEach() - loops thru JS object
     debugger  - chrome://inspect
 */
@@ -76,7 +76,7 @@ const removeNote = (title) => {
 const readNote = (title) => {
     const notes = loadNotes();
     const findNote = notes.find( (aNote) => aNote.title === title );                         //check if title exists
-    //debugger
+    debugger
     if(findNote) {                                                                           //if title exists
         const filterInNote = notes.filter( (theNote) => theNote.title === title);            //filter in that single note
         filterInNote.forEach(aNote => console.log(`Title: ` + aNote.title, `Body: ` + aNote.body));
